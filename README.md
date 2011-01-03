@@ -3,7 +3,7 @@
 
 This django app closes a gap I found several times on handling foreign keys in the admin. There is a bunch of approaches how to select foreign keys comfortably, the best one might be [django-ajax-selects](http://code.google.com/p/django-ajax-selects/), which provides a very good and customizable autocompletion function. It has its limitations, though, since it's not possible to do complex queries with an autocompletion function.
 
-So this app's purpose if to offer a complete search form, which basically contains a ModelForm of the related field's model and some ajax stuff.
+So this app's purpose is to offer a complete search form, which basically contains a ModelForm of the related field's model and some ajax stuff.
 
 **NOTE:** This is a first draft of the app, and my first app on github ever, so use with care. Please note the attached MIT-LICENSE.
 
