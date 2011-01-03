@@ -5,6 +5,14 @@ This django app closes a gap I found several times on handling foreign keys in t
 
 So this app's purpose is to offer a complete search form, which basically contains a ModelForm of the related field's model and some ajax stuff.
 
+When a related field selection looks like this before:
+
+![Before](http://oertel.it/pub/fk-before.png)
+
+this it how it looks after, in a simple version:
+
+![After](http://oertel.it/pub/fk-after.png)
+
 **NOTE:** This is a first draft of the app, and my first app on github ever, so use with care. Please note the attached MIT-LICENSE.
 
 ### INSTALLATION
