@@ -66,7 +66,7 @@ You can overwrite all this stuff, of course.
 
 A more complete example:
 
-First, we add a "handlers.py" to an app directory of a model which shall be used as a related model. The model targets images, and therefore contains copyrights notes etc., which be want to search later.
+First, we add a "handlers.py" to an app directory of a model which shall be used as a related model. The model targets images, and therefore contains copyrights notes etc., which we want to search later.
 Our handler looks like this:
 
     from django.utils.safestring import mark_safe
@@ -111,6 +111,8 @@ Our handler looks like this:
                 'image_preview': obj.preview(),
             }))
     
+        # This is the representation of the selected item. It is the visible
+        # replacement for django's foreignkey-widget.
         def selected_item(self, obj):
             return mark_safe('%(title)s<br />%(image_preview)s' % ({
                 'title': obj,
