@@ -1,0 +1,35 @@
+# Copyright (C) 2011
+# This file is distributed under the same license as the foreignkeysearch package.
+# Stefan T. Oertel <so@oertel.it>, 2011.
+#
+#: handler.py:22
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: handler.py:36
+msgid "no results"
+msgstr "Keine Ergebnisse"
+
+#: templates/foreignkeysearch/widget.html:9
+msgid "no object selected"
+msgstr "kein Objekt ausgewählt"
+
+#: templates/foreignkeysearch/widget.html:73
+msgid "Lookup"
+msgstr "Suchen"
+
+#: templates/foreignkeysearch/widget.html:74
+msgid "Add Another"
+msgstr "Neu anlegen"
+
+#: templates/foreignkeysearch/widget.html:75
+msgid "remove"
+msgstr "entfernen"
+
+#: templates/foreignkeysearch/widget.html:78
+msgid "Search for"
+msgstr "Suche nach"
+
+#: templates/foreignkeysearch/widget.html:80
+msgid "Search"
+msgstr "Suchen"
