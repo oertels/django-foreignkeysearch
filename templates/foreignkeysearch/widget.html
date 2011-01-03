@@ -81,10 +81,12 @@ $(document).ready(function() {
 <a href="#" id="remove_foreignkey_{{ field_name }}" alt="{% trans 'remove' %}">{% trans 'remove' %}</a>
 <p>
 
-<div id="search_panel_{{ field_name }}" class="foreignsearch_search_panel" style="clear:both;width:100%;display:none;">
+<div id="search_panel_{{ field_name }}" class="foreignsearch_search_panel" style="padding:4px;background-color: #EEE;clear:both;width:100%;display:none;">
     <h3>{% trans 'Search for' %} {{ related_model_name_verbose }}</h3>
-    {{ form.as_p }}
+    <table>
+    {{ form.as_table }}
+    </table>
     <button id="perform_search_{{ field_name }}">{% trans 'Search' %}</button>
-    <div id="results_panel_{{ field_name }}"></div>
+    <div class="foreignkeysearch_results_panel" id="results_panel_{{ field_name }}"></div>
 </div>
 </p>
