@@ -61,6 +61,6 @@ class BaseHandler(object):
         """
         Returns the HTML-Representation of an item in the result list
         """
-        return mark_safe('[link]%(title)s[/link]<br />' % ({
+        return mark_safe(u'[link]%(title)s[/link]<br />' % ({
             'title': obj
         }))
