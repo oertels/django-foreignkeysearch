@@ -21,6 +21,7 @@ function get_foreignkey_value_{{ field_name}}() {
             $('#value_{{ field_name }}').html(data.value);
             $('#remove_foreignkey_{{ field_name }}').show();
         }
+
     });
     
 }
@@ -45,6 +46,8 @@ $(document).ready(function() {
     });
     
     $('#perform_search_{{ field_name }}').click(function() {
+
+        $(this).attr('disabled', true).text('{% trans 'Loading' %}...');
         // Send ajax request
         formdata = $('#perform_search_{{ field_name }}').closest("form").serialize();
         console.log(formdata);
@@ -64,7 +67,9 @@ $(document).ready(function() {
             }
             $('#results_panel_{{ field_name }}').html(s).fadeIn('fast');
             
-            console.log(data)
+            // Enable search-button
+            $('#perform_search_{{ field_name }}').attr('disabled', false).text('{% trans 'Search' %}...');
+
         });
         return false;
     });

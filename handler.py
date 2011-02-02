@@ -5,14 +5,14 @@ from django.utils.translation import ugettext as _
 class BaseHandler(object):
     resultset = None
     exclude = ()
-    
+
     def __init__(self, db_field=None):
         # Register instance globally
         from foreignkeysearch import registered_handlers
         self.db_field = db_field
         if not self.__class__.__name__ in registered_handlers:
             registered_handlers[self.__class__.__name__] = self
-    
+
     def pre_results(self):
         """
         The return string will be inserted before the result list
@@ -20,7 +20,7 @@ class BaseHandler(object):
         return '<table>'
         """
         return '<h4>%s:</h4>' % _('Results')
-        
+
     def post_results(self):
         """
         The return string will be inserted after the result list.
@@ -28,7 +28,7 @@ class BaseHandler(object):
         return '</table>'
         """
         return ''
-    
+
     def no_results(self):
         """
         A "no results"-string
@@ -47,7 +47,7 @@ class BaseHandler(object):
         if not q:
             return []
         return self.model.objects.filter(q)
-        
+
     def selected_item(self, obj):
         """
         Returns the HTML-Representation of a selected item
@@ -56,7 +56,7 @@ class BaseHandler(object):
            return obj.__unicode__()
         except:
             return obj.__repr__()
-                
+
     def item(self, obj):
         """
         Returns the HTML-Representation of an item in the result list
