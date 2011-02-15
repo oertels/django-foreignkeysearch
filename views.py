@@ -7,7 +7,13 @@ from foreignkeysearch import registered_handlers
 
 @staff_member_required
 def search(request, handler):
-    h = registered_handlers[handler]
+    h = registered_handlers.get(handler, None)
+    if h is None:
+        return HttpResponse(
+             simplejson.dumps({}),
+             mimetype='application/json'
+        )
+
     related_field_name = h.db_field.name
 
     # Prepare handler vars
@@ -40,7 +46,12 @@ def search(request, handler):
 @staff_member_required
 def get_item(request, handler):
     object_id = request.GET.get('object_id', 0)
-    h = registered_handlers[handler]
+    h = registered_handlers.get(handler, None)
+    if h is None:
+        return HttpResponse(
+             simplejson.dumps({}),
+             mimetype='application/json'
+        )
     try:
         obj = h.model.objects.get(id=object_id)
         d = {'object_id': object_id, 'value': h.selected_item(obj)}
