@@ -50,7 +50,6 @@ $(document).ready(function() {
         $(this).attr('disabled', true).text('{% trans 'Loading' %}...');
         // Send ajax request
         formdata = $('#perform_search_{{ field_name }}').closest("form").serialize();
-        console.log(formdata);
         $.post('{% url foreignkey_search handler=handler_name %}?field={{ field_name }}', formdata, function(data) {
             // Display results
             s = '';
@@ -68,7 +67,7 @@ $(document).ready(function() {
             $('#results_panel_{{ field_name }}').html(s).fadeIn('fast');
             
             // Enable search-button
-            $('#perform_search_{{ field_name }}').attr('disabled', false).text('{% trans 'Search' %}...');
+            $('#perform_search_{{ field_name }}').attr('disabled', false).text('{% trans 'Search' %}');
 
         });
         return false;
