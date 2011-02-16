@@ -79,7 +79,7 @@ $(document).ready(function() {
 });
 </script>
 <div id="value_{{ field_name }}" style="float: left;margin-right:8px;" class="foreignsearch_value_panel"></div>
-<input type="hidden" name="{{ field_name}}" id="id_{{ field_name }}" value="{{ field_value|default:"" }}">
+<input type="hidden" name="{{ field_name_original }}" id="id_{{ field_name }}" value="{{ field_value|default:"" }}">
 <a href="#" id="toggle_search_form_{{ field_name }}"><img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/selector-search.gif" width="16" height="16" alt="{% trans 'Lookup' %}"></a>
 <a href="/admin/{{ related_app_name|lower }}/{{ related_model_name|lower }}/add/" class="add-another" id="add_id_{{ related_model_name|lower}}" onclick="return showAddAnotherPopup(this);"> <img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/icon_addlink.gif" width="10" height="10" alt="{% trans 'Add Another' %}"></a>
 <a href="#" id="remove_foreignkey_{{ field_name }}" alt="{% trans 'remove' %}">{% trans 'remove' %}</a>

@@ -52,7 +52,8 @@ class ForeignKeySearchForm(forms.HiddenInput):
 
        # Set template variables
        c = Context({
-           'field_name': name,
+           'field_name': name.replace('-', '____'),
+           'field_name_original': name,
            'field_value': value,
            'field': self.db_field,
            'app_name': self.db_field.model._meta.app_label,
