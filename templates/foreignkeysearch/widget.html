@@ -49,7 +49,7 @@ $(document).ready(function() {
 
         $(this).attr('disabled', true).text('{% trans 'Loading' %}...');
         // Send ajax request
-        formdata = $('#perform_search_{{ field_name }}').closest("form").serialize();
+        formdata = $('#container_{{ field_name}} :input').serialize();
         $.post('{% url foreignkey_search handler=handler_name %}?field={{ field_name }}', formdata, function(data) {
             // Display results
             s = '';
@@ -78,6 +78,7 @@ $(document).ready(function() {
     
 });
 </script>
+<div id="container_{{ field_name}}">
 <div id="value_{{ field_name }}" style="float: left;margin-right:8px;" class="foreignsearch_value_panel"></div>
 <input type="hidden" name="{{ field_name_original }}" id="id_{{ field_name }}" value="{{ field_value|default:"" }}">
 <a href="#" id="toggle_search_form_{{ field_name }}"><img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/selector-search.gif" width="16" height="16" alt="{% trans 'Lookup' %}"></a>
@@ -94,3 +95,4 @@ $(document).ready(function() {
     <div class="foreignkeysearch_results_panel" id="results_panel_{{ field_name }}"></div>
 </div>
 </p>
+</div>
