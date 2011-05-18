@@ -3,9 +3,11 @@ import re
 from django.utils import simplejson
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.csrf import csrf_exempt
 from foreignkeysearch import registered_handlers
 
 @staff_member_required
+@csrf_exempt
 def search(request, handler):
     h = registered_handlers.get(handler, None)
     if h is None:
