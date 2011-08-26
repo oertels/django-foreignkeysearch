@@ -1,0 +1,98 @@
+{% load i18n %}
+<script type="text/javascript">
+$ = django.jQuery;
+
+function get_foreignkey_value_{{ field_name}}() {
+    if ($('#id_{{ field_name }}').val() == '') {
+        $('#value_{{ field_name }}').html('-- {% trans 'no object selected' %} --');
+        $('#remove_foreignkey_{{ field_name }}').hide();
+        return;
+    }
+    
+    $.get('{% url foreignkey_get handler=handler_name %}?object_id='+$('#id_{{ field_name }}').val(), function(data) {
+        if (data.value == '') {
+            $('#id_{{ field_name }}').val('');
+            $('#value_{{ field_name }}').html('-- {% trans 'no object selected' %} --');
+            $('#remove_foreignkey_{{ field_name }}').hide();
+            
+        }
+        else {
+            $('#id_{{ field_name }}').val(data.object_id);
+            $('#value_{{ field_name }}').html(data.value);
+            $('#remove_foreignkey_{{ field_name }}').show();
+        }
+
+    });
+    
+}
+var val_{{ field_name }} = '{{ field_value }}';
+
+function monitor_{{ field_name }}() {
+    var current_val = $('#id_{{ field_name }}').val();
+    if (current_val != val_{{ field_name }}) {
+        val = current_val;
+        get_foreignkey_value_{{ field_name}}();
+    }
+}
+$(document).ready(function() {
+    $('#toggle_search_form_{{ field_name }}').click(function() {
+        $('#search_panel_{{ field_name }}').toggle('fast');
+        return false;
+    });
+    
+    $('#remove_foreignkey_{{ field_name }}').click(function() {
+        $('#id_{{ field_name }}').val('');
+        get_foreignkey_value_{{ field_name}}();
+    });
+    
+    $('#perform_search_{{ field_name }}').click(function() {
+
+        $(this).attr('disabled', true).text('{% trans 'Loading' %}...');
+        // Send ajax request
+        formdata = $('#container_{{ field_name}} :input').serialize();
+        $.post('{% url foreignkey_search handler=handler_name %}?field={{ field_name }}', formdata, function(data) {
+            // Display results
+            s = '';
+            $('#results_panel_{{ field_name }}').html('').hide();
+            if ($.isEmptyObject(data.results)) {
+                s = data.no_results;
+            }
+            else {
+                s += data.pre;
+                $.each(data.results, function(k,v) {
+                    s += v;
+                });
+                s += data.post;
+            }
+            $('#results_panel_{{ field_name }}').html(s).fadeIn('fast');
+            
+            // Enable search-button
+            $('#perform_search_{{ field_name }}').attr('disabled', false).text('{% trans 'Search' %}');
+
+        });
+        return false;
+    });
+    
+    window.setInterval("monitor_{{ field_name }}()", 2000);
+    get_foreignkey_value_{{ field_name}}();
+    
+});
+</script>
+<div id="container_{{ field_name}}">
+<div id="value_{{ field_name }}" style="float: left;margin-right:8px;" class="foreignsearch_value_panel"></div>
+<input type="hidden" name="{{ field_name_original }}" id="id_{{ field_name }}" value="{{ field_value|default:"" }}">
+<a href="#" id="toggle_search_form_{{ field_name }}"><img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/selector-search.gif" width="16" height="16" alt="{% trans 'Lookup' %}"></a>
+<a href="/admin/{{ related_app_name|lower }}/{{ related_model_name|lower }}/add/" class="add-another" id="add_id_{{ related_model_name|lower}}" onclick="return showAddAnotherPopup(this);"> <img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/icon_addlink.gif" width="10" height="10" alt="{% trans 'Add Another' %}"></a>
+<a href="#" id="remove_foreignkey_{{ field_name }}" alt="{% trans 'remove' %}">{% trans 'remove' %}</a>
+<p>
+
+<div id="search_panel_{{ field_name }}" class="foreignsearch_search_panel" style="padding:4px;background-color: #EEE;clear:both;width:100%;display:none;">
+    <h3>{% trans 'Search for' %} {{ related_model_name_verbose }}</h3>
+    <table>
+    {{ form.as_table }}
+    </table>
+    <button id="perform_search_{{ field_name }}">{% trans 'Search' %}</button>
+    <div class="foreignkeysearch_results_panel" id="results_panel_{{ field_name }}"></div>
+</div>
+</p>
+</div>

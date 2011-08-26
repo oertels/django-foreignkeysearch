@@ -1,0 +1,2 @@
+registered_handlers = {}
+

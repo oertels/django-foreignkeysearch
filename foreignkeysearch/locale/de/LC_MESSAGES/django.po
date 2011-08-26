@@ -1,0 +1,50 @@
+# Copyright (C) 2011
+# This file is distributed under the same license as the foreignkeysearch package.
+# Stefan T. Oertel <so@oertel.it>, 2011.
+#
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-02 08:57+0100\n"
+"Last-Translator: Stefan T. Oertel <so@oertel.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: de\n"
+
+#: handler.py:22
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: handler.py:36
+msgid "no results"
+msgstr "Keine Ergebnisse"
+
+#: templates/foreignkeysearch/widget.html:7
+#: templates/foreignkeysearch/widget.html:15
+msgid "no object selected"
+msgstr "kein Objekt ausgewählt"
+
+#: templates/foreignkeysearch/widget.html:50
+msgid "Loading"
+msgstr "Lade"
+
+#: templates/foreignkeysearch/widget.html:71
+#: templates/foreignkeysearch/widget.html:94
+msgid "Search"
+msgstr "Suchen"
+
+#: templates/foreignkeysearch/widget.html:84
+msgid "Lookup"
+msgstr "Suchen"
+
+#: templates/foreignkeysearch/widget.html:85
+msgid "Add Another"
+msgstr "Neu anlegen"
+
+#: templates/foreignkeysearch/widget.html:86
+msgid "remove"
+msgstr "entfernen"
+
+#: templates/foreignkeysearch/widget.html:90
+msgid "Search for"
+msgstr "Suche nach"
