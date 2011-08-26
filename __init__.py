@@ -1,2 +1,0 @@
-registered_handlers = {}
-
