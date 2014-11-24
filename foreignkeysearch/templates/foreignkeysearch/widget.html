@@ -2,14 +2,14 @@
 <script type="text/javascript">
 $ = django.jQuery;
 
-function get_foreignkey_value_{{ field_name}}() {
+function get_foreignkey_value_{{ field_name }}() {
     if ($('#id_{{ field_name }}').val() == '') {
         $('#value_{{ field_name }}').html('-- {% trans 'no object selected' %} --');
         $('#remove_foreignkey_{{ field_name }}').hide();
         return;
     }
-    
-    $.get('{% url foreignkey_get handler=handler_name %}?object_id='+$('#id_{{ field_name }}').val(), function(data) {
+    console.log('{{ foreignkey_get_url }}?object_id='+$('#id_{{ field_name }}').val());
+    $.get('{{ foreignkey_get_url }}?object_id='+$('#id_{{ field_name }}').val(), function(data) {
         if (data.value == '') {
             $('#id_{{ field_name }}').val('');
             $('#value_{{ field_name }}').html('-- {% trans 'no object selected' %} --');
@@ -50,7 +50,7 @@ $(document).ready(function() {
         $(this).attr('disabled', true).text('{% trans 'Loading' %}...');
         // Send ajax request
         formdata = $('#container_{{ field_name}} :input').serialize();
-        $.post('{% url foreignkey_search handler=handler_name %}?field={{ field_name }}', formdata, function(data) {
+        $.post('{{ foreignkey_search_url }}?field={{ field_name }}', formdata, function(data) {
             // Display results
             s = '';
             $('#results_panel_{{ field_name }}').html('').hide();
@@ -81,8 +81,8 @@ $(document).ready(function() {
 <div id="container_{{ field_name}}">
 <div id="value_{{ field_name }}" style="float: left;margin-right:8px;" class="foreignsearch_value_panel"></div>
 <input type="hidden" name="{{ field_name_original }}" id="id_{{ field_name }}" value="{{ field_value|default:"" }}">
-<a href="#" id="toggle_search_form_{{ field_name }}"><img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/selector-search.gif" width="16" height="16" alt="{% trans 'Lookup' %}"></a>
-<a href="/admin/{{ related_app_name|lower }}/{{ related_model_name|lower }}/add/" class="add-another" id="add_id_{{ related_model_name|lower}}" onclick="return showAddAnotherPopup(this);"> <img src="{{ ADMIN_MEDIA_PREFIX }}img/admin/icon_addlink.gif" width="10" height="10" alt="{% trans 'Add Another' %}"></a>
+<a href="#" id="toggle_search_form_{{ field_name }}"><img src="{{ ADMIN_IMG_PREFIX }}selector-search.gif" width="16" height="16" alt="{% trans 'Lookup' %}"></a>
+<a href="/admin/{{ related_app_name|lower }}/{{ related_model_name|lower }}/add/" class="add-another" id="add_id_{{ related_model_name|lower}}" onclick="return showAddAnotherPopup(this);"> <img src="{{ ADMIN_IMG_PREFIX }}icon_addlink.gif" width="10" height="10" alt="{% trans 'Add Another' %}"></a>
 <a href="#" id="remove_foreignkey_{{ field_name }}" alt="{% trans 'remove' %}">{% trans 'remove' %}</a>
 <p>
 
