@@ -8,7 +8,7 @@ function get_foreignkey_value_{{ field_name }}() {
         $('#remove_foreignkey_{{ field_name }}').hide();
         return;
     }
-    console.log('{{ foreignkey_get_url }}?object_id='+$('#id_{{ field_name }}').val());
+
     $.get('{{ foreignkey_get_url }}?object_id='+$('#id_{{ field_name }}').val(), function(data) {
         if (data.value == '') {
             $('#id_{{ field_name }}').val('');
