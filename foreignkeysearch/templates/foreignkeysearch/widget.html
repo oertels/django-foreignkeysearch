@@ -30,10 +30,11 @@ var val_{{ field_name }} = '{{ field_value }}';
 function monitor_{{ field_name }}() {
     var current_val = $('#id_{{ field_name }}').val();
     if (current_val != val_{{ field_name }}) {
-        val = current_val;
-        get_foreignkey_value_{{ field_name}}();
+        val_{{ field_name }} = current_val;
+        get_foreignkey_value_{{ field_name }}();
     }
 }
+
 $(document).ready(function() {
     $('#toggle_search_form_{{ field_name }}').click(function() {
         $('#search_panel_{{ field_name }}').toggle('fast');
@@ -42,7 +43,7 @@ $(document).ready(function() {
     
     $('#remove_foreignkey_{{ field_name }}').click(function() {
         $('#id_{{ field_name }}').val('');
-        get_foreignkey_value_{{ field_name}}();
+        get_foreignkey_value_{{ field_name }}();
     });
     
     $('#perform_search_{{ field_name }}').click(function() {
@@ -74,7 +75,7 @@ $(document).ready(function() {
     });
     
     window.setInterval("monitor_{{ field_name }}()", 2000);
-    get_foreignkey_value_{{ field_name}}();
+    get_foreignkey_value_{{ field_name }}();
     
 });
 </script>
@@ -82,7 +83,7 @@ $(document).ready(function() {
 <div id="value_{{ field_name }}" style="float: left;margin-right:8px;" class="foreignsearch_value_panel"></div>
 <input type="hidden" name="{{ field_name_original }}" id="id_{{ field_name }}" value="{{ field_value|default:"" }}">
 <a href="#" id="toggle_search_form_{{ field_name }}"><img src="{{ ADMIN_IMG_PREFIX }}selector-search.gif" width="16" height="16" alt="{% trans 'Lookup' %}"></a>
-<a href="/admin/{{ related_app_name|lower }}/{{ related_model_name|lower }}/add/" class="add-another" id="add_id_{{ related_model_name|lower}}" onclick="return showAddAnotherPopup(this);"> <img src="{{ ADMIN_IMG_PREFIX }}icon_addlink.gif" width="10" height="10" alt="{% trans 'Add Another' %}"></a>
+<a href="/admin/{{ related_app_name|lower }}/{{ related_model_name|lower }}/add/" class="add-another" id="add_id_{{ field_name }}" onclick="return showAddAnotherPopup(this);"> <img src="{{ ADMIN_IMG_PREFIX }}icon_addlink.gif" width="10" height="10" alt="{% trans 'Add Another' %}"></a>
 <a href="#" id="remove_foreignkey_{{ field_name }}" alt="{% trans 'remove' %}">{% trans 'remove' %}</a>
 <p>
 
