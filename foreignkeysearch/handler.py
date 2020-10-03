@@ -1,6 +1,5 @@
 from django.db.models import Q
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
 
 class BaseHandler(object):
     resultset = None
